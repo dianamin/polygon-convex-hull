@@ -53,7 +53,6 @@ Polymer({
         this.fire('click', index);
     });
     svg.append(this.circle);
-    console.log(d3.select(this.circle).attr('r'));
     d3.select(this.circle).transition().duration(300).attr("r", 15);
   },
 
@@ -62,4 +61,8 @@ Polymer({
     return x < 0;
   },
 
+  makeSpecial: function() {
+    this.circle.classList.add('special');
+    d3.select(this.circle).transition().duration(300).attr("r", 20);
+  }
 });

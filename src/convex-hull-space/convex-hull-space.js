@@ -33,7 +33,6 @@ Polymer({
   _addPoint: function(x, y) {
   	var newPoint = document.createElement('convex-hull-point');
     this.append(newPoint);
-    console.log(this.points);
     var index = this.points.length;
   	newPoint.build(this.$.svg, x, y, index);
     this.push('points', newPoint);
@@ -53,7 +52,6 @@ Polymer({
   },
 
   _svgOnTap: function(event) {
-    console.log(this);
     if (event.target == this.$.svg) {
       this._addPoint(event.clientX, event.clientY);
     }
@@ -64,9 +62,6 @@ Polymer({
       if (a.y == b.y) return a.x > b.x;
       return a.y > b.y;
     });
-    this.points.forEach((point) => {
-      console.log(point.x + " " + point.y);
-    })
     var stack = [0, 1];
     var top = 1;
     var length = this.points.length;
@@ -80,7 +75,6 @@ Polymer({
       if (i == length - 1) step = -1;
       if (!this.points[i].inConvexHull) {
         while(top >= 1 && this.points[i].getPosition(this.points[stack[top - 1]], this.points[stack[top]])) {
-          console.log(this.points[i].getPosition(this.points[stack[top - 1]], this.points[stack[top]]));
           this.points[stack[top]].inConvexHull = false;
           stack.pop();
           top--;
@@ -91,8 +85,10 @@ Polymer({
       }
     }
 
-    console.log(stack);
-
+    this.points.forEach((point) => {
+      if (point.inConvexHull === true)
+        point.makeSpecial();
+    });
     for (var i = 1; i < stack.length; i++) {
       this._addEdge(this.points[stack[i]], this.points[stack[i - 1]], true);
     }

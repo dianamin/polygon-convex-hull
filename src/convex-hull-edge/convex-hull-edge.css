@@ -1,5 +1,9 @@
 .line {
   stroke: #16a085;
+  transition: stroke 0.1s;
+  -webkit-transition: stroke 0.1s;
+  -moz-transition: stroke 0.1s;
+  -o-transition: stroke 0.1s;
 }
 
 .special {
