@@ -1,0 +1,7 @@
+{
+  "name": "polygon-convex-hull",
+  "short_name": "polygon-convex-hull",
+  "description": "Project for the Computational Geometry Lab",
+  "start_url": "/",
+  "display": "standalone"
+}
