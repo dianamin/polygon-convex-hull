@@ -34,6 +34,9 @@ Polymer({
     d3.select(this.circle).attr('r', 0);
     this.circle.classList.add('convex-hull-point');
     this.circle.classList.add('circle');
+    this.circle.addEventListener('click', () => {
+        this.fire('click', index);
+    });
     svg.append(this.circle);
     console.log(d3.select(this.circle).attr('r'));
     d3.select(this.circle).transition().duration(300).attr("r", 15);

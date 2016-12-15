@@ -2,4 +2,5 @@ svg {
 	height: 100%;
 	width: 100%;
 	background-color: #eeeeee;
+	cursor: pointer;
 }
