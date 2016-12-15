@@ -1,3 +1,8 @@
 .line {
   stroke: #16a085;
 }
+
+.special {
+  stroke: #8e44ad;
+  stroke-width: 4px;
+}

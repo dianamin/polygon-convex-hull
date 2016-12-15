@@ -33,6 +33,9 @@ Polymer({
     this.line.classList.add('line');
     svg.append(this.line);
     d3.select(this.line).transition().duration(300).attr("stroke-width", 1);
-  }
+  },
 
+  makeSpecial:function() {
+    this.line.classList.add('special');
+  }
 });

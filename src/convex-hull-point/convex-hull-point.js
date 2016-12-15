@@ -6,6 +6,10 @@ Polymer({
       type: Object,
     },
 
+    inConvexHull: {
+      type: Boolean,
+    },
+
     index: {
       type: Number,
     },
@@ -28,6 +32,7 @@ Polymer({
     this.index = index;
     this.cx = cx;
     this.cy = cy;
+    this.inConvexHull = false;
     this.circle = document.createElementNS(this._namespace, 'circle');
     d3.select(this.circle).attr('cx', cx);
     d3.select(this.circle).attr('cy', cy);
@@ -40,6 +45,11 @@ Polymer({
     svg.append(this.circle);
     console.log(d3.select(this.circle).attr('r'));
     d3.select(this.circle).transition().duration(300).attr("r", 15);
-  }
+  },
+
+  getPosition: function(a, b) {
+    var x = a.x * b.y + b.x * this.y + this.x * a.y - a.y * b.x - b.y * this.x - this.x * a.x;
+    return x < 0;
+  },
 
 });
