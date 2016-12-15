@@ -59,15 +59,15 @@ Polymer({
 
   _convexHull: function() {
     this.points.sort(function(a, b) {
-      if (a.y == b.y) return a.x > b.x;
-      return a.y > b.y;
+      if (a.y == b.y) return a.x - b.x;
+      return a.y - b.y;
     });
     var stack = [0, 1];
     var top = 1;
     var length = this.points.length;
 
     this.points[0].inConvexHull = false;
-    this.points[1].inConvexHull = true;
+    this.points[1].inConvexHull = false;
 
 
     var step = 1;
