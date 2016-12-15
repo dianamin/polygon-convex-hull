@@ -61,11 +61,11 @@ Polymer({
 
   _convexHull: function() {
     this.points.sort(function(a, b) {
-      if (a.cy == b.cy) return a.cx < b.cx;
-      return a.cy > b.cy;
+      if (a.y == b.y) return a.x > b.x;
+      return a.y > b.y;
     });
     this.points.forEach((point) => {
-      console.log(point.cx + " " + point.cy);
+      console.log(point.x + " " + point.y);
     })
     var stack = [0, 1];
     var top = 1;
@@ -79,7 +79,8 @@ Polymer({
     for (var i = 2; i >= 0; i += step) {
       if (i == length - 1) step = -1;
       if (!this.points[i].inConvexHull) {
-        while(stack.length >= 1 && this.points[i].getPosition(this.points[stack[top - 1]], this.points[stack[top]])) {
+        while(top >= 1 && this.points[i].getPosition(this.points[stack[top - 1]], this.points[stack[top]])) {
+          console.log(this.points[i].getPosition(this.points[stack[top - 1]], this.points[stack[top]]));
           this.points[stack[top]].inConvexHull = false;
           stack.pop();
           top--;
@@ -96,29 +97,6 @@ Polymer({
       this._addEdge(this.points[stack[i]], this.points[stack[i - 1]], true);
     }
 
-  }
-/*
- 
-void rezolva() {
-    int nr = 2;
-    stiva[1] = 1; pus[1] = false;
-    stiva[2] = 2; pus[2] = true;
-    int pas = 1;
-    for (int i = 3; i > 0; i += pas) {
-        if (i == n) pas = -1;
-        if (!pus[i]) {
-            while (nr >= 2 && semn(punct[stiva[nr - 1]], punct[stiva[nr]], punct[i])) pus[stiva[nr--]] = false;
-            stiva[++nr] = i;
-            pus[i] = true;
-        }
-    }
-    nr--;
-    g << nr << '\n';
-    for (int i = 1; i <= nr; i++) {
-        g << fixed << setprecision(6) << punct[stiva[i]].x << ' ' << punct[stiva[i]].y << '\n';
-    }
-}*/
- 
- 
+  },
 
 });

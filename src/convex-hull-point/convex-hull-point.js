@@ -22,6 +22,14 @@ Polymer({
       type: Number,
     },
 
+    x: {
+      type: Number,
+    },
+
+    y: {
+      type: Number,
+    },
+
     _namespace: {
       type: String,
       value: 'http://www.w3.org/2000/svg',
@@ -32,6 +40,8 @@ Polymer({
     this.index = index;
     this.cx = cx;
     this.cy = cy;
+    this.x = cx;
+    this.y = (-1) * cy;
     this.inConvexHull = false;
     this.circle = document.createElementNS(this._namespace, 'circle');
     d3.select(this.circle).attr('cx', cx);
@@ -48,7 +58,7 @@ Polymer({
   },
 
   getPosition: function(a, b) {
-    var x = a.x * b.y + b.x * this.y + this.x * a.y - a.y * b.x - b.y * this.x - this.x * a.x;
+    var x = a.x * b.y + b.x * this.y + this.x * a.y - a.y * b.x - b.y * this.x - this.y * a.x;
     return x < 0;
   },
 
