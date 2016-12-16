@@ -58,6 +58,16 @@ Polymer({
   },
 
   _convexHull: function() {
+    if (this.points.length <= 2) {
+      this.points.forEach((point) => {
+        point.makeSpecial();
+      });
+      this.edges.forEach((edge) => {
+        edge.makeSpecial();
+      });
+      return;
+    }
+
     this.points.sort(function(a, b) {
       if (a.y == b.y) return a.x - b.x;
       return a.y - b.y;
