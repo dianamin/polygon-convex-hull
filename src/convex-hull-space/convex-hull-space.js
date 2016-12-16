@@ -40,14 +40,7 @@ Polymer({
       this._addEdge(this.points[index - 1], this.points[index]);
     }
 
-    newPoint.addEventListener('click', (event) => {
-      if (event.detail != 0) return;
-      var length = this.points.length;
-      this._addEdge(this.points[length - 1], this.points[0]);
-
-      this.unlisten(this.$.svg, 'click', '_svgOnTap');
-      this._convexHull();
-    })
+    this.listen(newPoint, 'click', '_pointOnTap');
 
   },
 
@@ -55,6 +48,15 @@ Polymer({
     if (event.target == this.$.svg) {
       this._addPoint(event.clientX, event.clientY);
     }
+  },
+
+  _pointOnTap: function(event) {
+    if (event.detail != 0) return;
+    var length = this.points.length;
+    this._addEdge(this.points[length - 1], this.points[0]);
+
+    this.unlisten(this.$.svg, 'click', '_svgOnTap');
+    this._convexHull();
   },
 
   _convexHull: function() {
@@ -99,6 +101,7 @@ Polymer({
       if (point.inConvexHull === true) {
         point.makeSpecial();
       }
+      this.unlisten(point, 'click', '_pointOnTap');
     });
     for (var i = 1; i < stack.length; i++) {
       this._addEdge(this.points[stack[i]], this.points[stack[i - 1]], true);
