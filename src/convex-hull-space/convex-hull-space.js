@@ -67,7 +67,7 @@ Polymer({
     var length = this.points.length;
 
     this.points[0].inConvexHull = false;
-    this.points[1].inConvexHull = false;
+    this.points[1].inConvexHull = true;
 
 
     var step = 1;
@@ -85,9 +85,10 @@ Polymer({
       }
     }
 
-    this.points.forEach((point) => {
-      if (point.inConvexHull === true)
+    this.points.forEach((point, index) => {
+      if (point.inConvexHull === true) {
         point.makeSpecial();
+      }
     });
     for (var i = 1; i < stack.length; i++) {
       this._addEdge(this.points[stack[i]], this.points[stack[i - 1]], true);
